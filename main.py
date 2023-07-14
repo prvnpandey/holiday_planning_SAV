@@ -23,7 +23,7 @@ if __name__ == '__main__':
     #population = int(input('enter the population in city, must be an integer value'))
     population = 100000
     scenario = initial_scenario(population, population*0.1, 2 )
-    fraction_of_pop_holiday = Pop_distribution.samples # on daily basis
+    fraction_of_pop_holiday = Pop_distribution.departure_rate_for_hoilday() # on daily basis
     fleet, population, hoilday, hoilday_fleet = scenario_1(scenario, fraction_of_pop_holiday)
     print(f'The Population in city is {population}, with a fleet size of {fleet}')
     print(f'The Population on hoilday is {hoilday}, with a fleet size of {hoilday_fleet}')

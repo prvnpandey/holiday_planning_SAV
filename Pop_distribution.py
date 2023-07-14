@@ -2,7 +2,13 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-for i in range(0,1):
+def arrival_rate_back_to_city():
+    plt.cla()
+    random.seed(1)
+    
+    pass
+
+def departure_rate_for_hoilday():
     plt.cla()
     random.seed(1)
     mu, var, samples = 12, 2.3, 30
@@ -17,3 +23,4 @@ for i in range(0,1):
 
     plt.plot(samples)
     plt.show()
+    return samples
