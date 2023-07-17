@@ -2,11 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def gumbell_distribution():
-<<<<<<< HEAD
     mu, beta = 1.0, 4.5# location and scale
-=======
-    mu, beta = 1.0, 4.0# location and scale
->>>>>>> origin/main
 
     s = np.random.gumbel(mu, beta, 30)
 
@@ -36,8 +32,5 @@ def gumbell_distribution():
     # plt.plot(dep_rate,linewidth=2, color='g', label = 'dep_rate')
     # plt.legend()
     # plt.show()
-<<<<<<< HEAD
     return dep_rate, arrival_rate
-=======
-    return arrival_rate, dep_rate
->>>>>>> origin/main
+
