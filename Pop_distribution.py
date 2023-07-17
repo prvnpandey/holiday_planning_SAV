@@ -37,6 +37,6 @@ plt.plot(df2,label='arrival_rate')
 plt.xlabel(' Day of a month')
 plt.ylabel(' Fraction of population leaving and coming back to city')
 plt.legend(loc='best')
-plt.savefig('dep_arrival_rate1.png')
+plt.savefig('dep_arrival_rate.png')
 plt.show()
 
