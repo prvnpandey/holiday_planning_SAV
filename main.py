@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 
-import Pop_distribution
+from Pop_distribution import arrival_rate_back_to_city, departure_rate_for_hoilday
+from gumbell import gumbell_distribution
 # import simpy
 
 class initial_scenario():
@@ -14,9 +15,9 @@ def scenario_1(scenario, fraction_of_pop_to_holiday,fraction_of_pop_from_holiday
     population = scenario.population
     additional_fleet =[]
     for day in range(0,fraction_of_pop_to_holiday.size):
-        pop_on_holidayTrips = round(population*(fraction_of_pop_to_holiday[day]/100))
+        pop_on_holidayTrips = round(population*(fraction_of_pop_to_holiday[day]))
         if(day>0):
-            pop_back_to_city = round(population*(fraction_of_pop_from_holiday[day]/100))
+            pop_back_to_city = round(population*(fraction_of_pop_from_holiday[day]))
         else:
             pop_back_to_city = 0
         required_fleet_for_hoildayTrips = round((pop_on_holidayTrips-pop_back_to_city)/scenario.passenger_per_vehicle)
@@ -27,13 +28,19 @@ def scenario_1(scenario, fraction_of_pop_to_holiday,fraction_of_pop_from_holiday
 
     return fleet, population, scenario.population-population, (scenario.population-population)/scenario.passenger_per_vehicle, additional_fleet
 
-
+def plot_gumbell(dep_rate, arrival_rate):
+    plt.plot(arrival_rate, linewidth=2, color='r', label='arrival_rate')
+    plt.plot(dep_rate,linewidth=2, color='g', label = 'dep_rate')
+    plt.legend()
+    return plt.show()
 if __name__ == '__main__':
     #population = int(input('enter the population in city, must be an integer value'))
     population = 100000
     scenario = initial_scenario(population, population*0.1, 2 )
-    fraction_of_pop_to_holiday = Pop_distribution.departure_rate_for_hoilday() # on daily basis
-    fraction_of_pop_from_holiday = Pop_distribution.arrival_rate_back_to_city()
+    fraction_of_pop_to_holiday, fraction_of_pop_from_holiday = gumbell_distribution()
+    plot_gumbell(fraction_of_pop_to_holiday,fraction_of_pop_from_holiday)
+    # fraction_of_pop_to_holiday = Pop_distribution.departure_rate_for_hoilday() # on daily basis
+    # fraction_of_pop_from_holiday = Pop_distribution.arrival_rate_back_to_city()
     fleet, population, hoilday, hoilday_fleet,additional_fleet_per_day = scenario_1(scenario, fraction_of_pop_to_holiday, fraction_of_pop_from_holiday)
     print(f'The Population in city is {population}, with a fleet size of {fleet}')
     print(f'The Population on hoilday is {hoilday}, with a fleet size of {hoilday_fleet}')
