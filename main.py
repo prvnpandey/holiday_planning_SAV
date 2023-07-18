@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 
 import Pop_distribution
+import gumbell
 from scenario_2 import scenario_2
 # import simpy
 
@@ -40,8 +41,9 @@ if __name__ == '__main__':
     # print(f'The Population on hoilday is {hoilday}, with a fleet size of {hoilday_fleet}')
     # print(f'Total required fleet with hoilday scneario is {fleet+hoilday_fleet}')
  #___________________________________Scenario_2________________________________________________________________________
-
-    veh_outside = scenario_2(scenario,population)
+    dep_rate, arrival_rate = gumbell.gumbell_distribution()
+    veh_outside = scenario_2(scenario,dep_rate, arrival_rate)
+    print(f'the fleet size of {veh_outside} is sufficiently large to tackle hoilday trips for scenario_2')
 
 
 
