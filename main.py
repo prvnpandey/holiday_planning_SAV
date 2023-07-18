@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import Pop_distribution
 import gumbell
 from scenario_2 import scenario_2
+from print_result import scenario_2_result
 # import simpy
 
 class initial_scenario():
@@ -37,13 +38,10 @@ if __name__ == '__main__':
     # fraction_of_pop_to_holiday = Pop_distribution.departure_rate_for_hoilday() # on daily basis
     # fraction_of_pop_from_holiday = Pop_distribution.arrival_rate_back_to_city()
     # fleet, population, hoilday, hoilday_fleet,additional_fleet_per_day = scenario_1(scenario, fraction_of_pop_to_holiday, fraction_of_pop_from_holiday)
-    # print(f'The Population in city is {population}, with a fleet size of {fleet}')
-    # print(f'The Population on hoilday is {hoilday}, with a fleet size of {hoilday_fleet}')
-    # print(f'Total required fleet with hoilday scneario is {fleet+hoilday_fleet}')
  #___________________________________Scenario_2________________________________________________________________________
     dep_rate, arrival_rate = gumbell.gumbell_distribution()
-    veh_outside = scenario_2(scenario,dep_rate, arrival_rate)
-    print(f'the fleet size of {veh_outside} is sufficiently large to tackle hoilday trips for scenario_2')
+    Net_vehcile_required_for_outside_trips = scenario_2(scenario,dep_rate, arrival_rate)
+    scenario_2_result(scenario, Net_vehcile_required_for_outside_trips)
 
 
 
