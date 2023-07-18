@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 
 import Pop_distribution
+from scenario_2 import scenario_2
 # import simpy
 
 class initial_scenario():
@@ -32,12 +33,16 @@ if __name__ == '__main__':
     #population = int(input('enter the population in city, must be an integer value'))
     population = 100000
     scenario = initial_scenario(population, population*0.1, 2 )
-    fraction_of_pop_to_holiday = Pop_distribution.departure_rate_for_hoilday() # on daily basis
-    fraction_of_pop_from_holiday = Pop_distribution.arrival_rate_back_to_city()
-    fleet, population, hoilday, hoilday_fleet,additional_fleet_per_day = scenario_1(scenario, fraction_of_pop_to_holiday, fraction_of_pop_from_holiday)
-    print(f'The Population in city is {population}, with a fleet size of {fleet}')
-    print(f'The Population on hoilday is {hoilday}, with a fleet size of {hoilday_fleet}')
-    print(f'Total required fleet with hoilday scneario is {fleet+hoilday_fleet}')
+    # fraction_of_pop_to_holiday = Pop_distribution.departure_rate_for_hoilday() # on daily basis
+    # fraction_of_pop_from_holiday = Pop_distribution.arrival_rate_back_to_city()
+    # fleet, population, hoilday, hoilday_fleet,additional_fleet_per_day = scenario_1(scenario, fraction_of_pop_to_holiday, fraction_of_pop_from_holiday)
+    # print(f'The Population in city is {population}, with a fleet size of {fleet}')
+    # print(f'The Population on hoilday is {hoilday}, with a fleet size of {hoilday_fleet}')
+    # print(f'Total required fleet with hoilday scneario is {fleet+hoilday_fleet}')
+ #___________________________________Scenario_2________________________________________________________________________
+
+    veh_outside = scenario_2(scenario,population)
+
 
 
 
