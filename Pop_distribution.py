@@ -30,13 +30,13 @@ def departure_rate_for_hoilday():
     samples = sample_pop[index]
     return samples
 
-df1 = departure_rate_for_hoilday()
-df2= arrival_rate_back_to_city()
-plt.plot(df1, label='departure_rate')
-plt.plot(df2,label='arrival_rate')
-plt.xlabel(' Day of a month')
-plt.ylabel(' Fraction of population leaving and coming back to city')
-plt.legend(loc='best')
-plt.savefig('dep_arrival_rate.png')
-plt.show()
+# df1 = departure_rate_for_hoilday()
+# df2= arrival_rate_back_to_city()
+# plt.plot(df1, label='departure_rate')
+# plt.plot(df2,label='arrival_rate')
+# plt.xlabel(' Day of a month')
+# plt.ylabel(' Fraction of population leaving and coming back to city')
+# plt.legend(loc='best')
+# plt.savefig('dep_arrival_rate.png')
+# plt.show()
 
