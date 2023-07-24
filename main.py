@@ -1,9 +1,9 @@
-import matplotlib.pyplot as plt
 
 import Pop_distribution
 import gumbell
-from scenario_2 import scenario_2
-from print_result import scenario_2_result
+import plot
+from scenario import scenario_2, scenario_1
+from print_result import scenario_2_result, scenario_1_result
 # import simpy
 
 class initial_scenario():
@@ -12,34 +12,18 @@ class initial_scenario():
         self.fleet = fleet
         self.passenger_per_vehicle = passenger_per_vehicle
 
-def scenario_1(scenario, fraction_of_pop_to_holiday,fraction_of_pop_from_holiday):
-    fleet = scenario.fleet
-    population = scenario.population
-    additional_fleet =[]
-    for day in range(0,fraction_of_pop_to_holiday.size):
-        pop_on_holidayTrips = round(population*(fraction_of_pop_to_holiday[day]/100))
-        if(day>0):
-            pop_back_to_city = round(population*(fraction_of_pop_from_holiday[day]/100))
-        else:
-            pop_back_to_city = 0
-        required_fleet_for_hoildayTrips = round((pop_on_holidayTrips-pop_back_to_city)/scenario.passenger_per_vehicle)
-        population = population-pop_on_holidayTrips +pop_back_to_city
-        fleet = fleet - required_fleet_for_hoildayTrips
-        additional_fleet.append(round((population*0.1 - fleet)))
-        fleet = fleet + additional_fleet[day]
-
-    return fleet, population, scenario.population-population, (scenario.population-population)/scenario.passenger_per_vehicle, additional_fleet
-
-
 if __name__ == '__main__':
     #population = int(input('enter the population in city, must be an integer value'))
-    population = 100000
+    population = 1000
+    # the percent of total population went on vacation on in a month
+    percent_of_population_on_hoilday = 0.2
     scenario = initial_scenario(population, population*0.1, 2 )
-    # fraction_of_pop_to_holiday = Pop_distribution.departure_rate_for_hoilday() # on daily basis
-    # fraction_of_pop_from_holiday = Pop_distribution.arrival_rate_back_to_city()
-    # fleet, population, hoilday, hoilday_fleet,additional_fleet_per_day = scenario_1(scenario, fraction_of_pop_to_holiday, fraction_of_pop_from_holiday)
+    dep_rate, arrival_rate = gumbell.gumbell_distribution(samplesize= percent_of_population_on_hoilday)
+    plot.plot_graph(arrival_rate, dep_rate)
+    fleet, population, hoilday, hoilday_fleet,additional_fleet_per_day = scenario_1(scenario, dep_rate, arrival_rate)
+    scenario_1_result(scenario, fleet, population, hoilday, hoilday_fleet)
  #___________________________________Scenario_2________________________________________________________________________
-    dep_rate, arrival_rate = gumbell.gumbell_distribution()
+
     Net_vehcile_required_for_outside_trips = scenario_2(scenario,dep_rate, arrival_rate)
     scenario_2_result(scenario, Net_vehcile_required_for_outside_trips)
 
