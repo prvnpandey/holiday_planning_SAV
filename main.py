@@ -3,6 +3,7 @@ import Pop_distribution
 import gumbell
 import plot
 from scenario import scenario_2, scenario_1
+import matplotlib.pyplot as plt
 from print_result import scenario_2_result, scenario_1_result
 # import simpy
 
@@ -15,17 +16,23 @@ class initial_scenario():
 if __name__ == '__main__':
     #population = int(input('enter the population in city, must be an integer value'))
     population = 1000
+    RouundTripTime = 3
     # the percent of total population went on vacation on in a month
     percent_of_population_on_hoilday = 0.2
     scenario = initial_scenario(population, population*0.1, 2 )
     dep_rate, arrival_rate = gumbell.gumbell_distribution(samplesize= percent_of_population_on_hoilday)
     plot.plot_graph(arrival_rate, dep_rate)
-    fleet, population, hoilday, hoilday_fleet,additional_fleet_per_day = scenario_1(scenario, dep_rate, arrival_rate)
-    scenario_1_result(scenario, fleet, population, hoilday, hoilday_fleet)
- #___________________________________Scenario_2________________________________________________________________________
+    # fleet, population, hoilday, hoilday_fleet,additional_fleet_per_day = scenario_1(scenario, dep_rate, arrival_rate)
+    fleet, city_pop = scenario_1(scenario, dep_rate, arrival_rate, RouundTripTime)
+    plot.scenario1_graph(fleet, city_pop)
 
-    Net_vehcile_required_for_outside_trips = scenario_2(scenario,dep_rate, arrival_rate)
-    scenario_2_result(scenario, Net_vehcile_required_for_outside_trips)
+ #    scenario_1_result(scenario, fleet, population, hoilday, hoilday_fleet)
+ # #___________________________________Scenario_2________________________________________________________________________
+ #
+    Net_vehcile_required, veh_in = scenario_2(scenario,dep_rate, arrival_rate, RouundTripTime)
+    # plot.scenario1_graph(net_veh=Net_vehcile_required, veh_in=veh_in)
+    plot.scenario_graph(Net_vehcile_required, veh_in)
+    # scenario_2_result(scenario, Net_vehcile_required_for_outside_trips)
 
 
 

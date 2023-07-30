@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 def gumbell_distribution(samplesize):
     mu, beta = 1.0, 4.5# location and scale
     # mu, beta = 0.9, 5
-    period = 60
+    period = 30
 
     s = np.random.gumbel(mu, beta, period)
     means = []
