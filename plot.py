@@ -1,4 +1,7 @@
 import matplotlib.pyplot as plt
+import numpy as np
+
+
 def plot_graph(arrival_rate, dep_rate):
     plt.plot(arrival_rate,linewidth=2, color='r', label='arrival_rate')
 
@@ -8,22 +11,35 @@ def plot_graph(arrival_rate, dep_rate):
     plt.xlabel('Caldender Days')
     plt.ylabel('Percentage of population')
     return plt.show()
+def plot_cdf(arrival_rate, dep_rate):
+    plt.plot(np.cumsum(arrival_rate),linewidth=2, color='r', label='arrival_rate')
 
-def scenario1_graph(additinal_fleet, city_pop):
+    plt.plot(np.cumsum(dep_rate),linewidth=2, color='g', label = 'dep_rate')
+    plt.legend()
+    plt.title('CDF plot of arrival and departure rate')
+    plt.xlabel('Caldender Days')
+    plt.ylabel('Percentage of population')
+    return plt.show()
+
+def scenario1_graph(additinal_fleet, city_pop, RoundTriptime):
     fig,(ax1,ax2) = plt.subplots(2, sharex=True)
-    ax1.plot(additinal_fleet,linewidth=2, color='r', label='additinal_fleet per day')
     ax2.plot(city_pop,linewidth=2, color='r', label = 'city population per day')
+    ax1.plot(additinal_fleet, linewidth=2, color='r', label='Round Trip time = ' + str(RoundTriptime) + ' day')
     ax1.set_ylabel('additional SAV')
     ax2.set_ylabel('Number of people')
     plt.xlabel('Caldender Days')
+    fig.set_tight_layout(True)
     fig.suptitle('The additial fleet and city population over the days (Scenario 1)')
+    plt.legend()
     return plt.show()
-def scenario_graph(*args, **kwargs):
+def scenario_graph(*args , **kwargs):
     fig, (ax1, ax2) = plt.subplots(2, sharex=True)
-    ax1.plot(args[0], linewidth=2, color='r', label='additinal_fleet per day')
     ax2.plot(args[1], linewidth=2, color='r', label='vehicle back to city')
-    ax1.set_ylabel('Outside trip fleet')
-    ax2.set_ylabel('vehicle back to city')
+    ax1.plot(args[0], linewidth=2, color='r', label='Round Trip time = ' + str(kwargs.get('RoundTriptime')) + ' day')
+    ax1.set_ylabel('Fleet required by hoilday \n fleet operator')
+    ax2.set_ylabel('Number of people \n per day in city')
     plt.xlabel('Caldender Days')
-    fig.suptitle('The additial fleet and vehicle back to city over the days (Scenario 2)')
+    fig.suptitle('SAV fleet and city population over the days (Scenario 2)')
+    fig.set_tight_layout(True)
+    # plt.legend(loc='right')
     return plt.show()
