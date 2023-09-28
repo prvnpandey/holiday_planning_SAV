@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def gumbell_distribution(samplesize):
+def gumbell_distribution(samplesize, RoundtripTime):
     mu, beta = 1.0, 4.5# location and scale
     # mu, beta = 0.9, 5
     period = 30
@@ -25,13 +25,12 @@ def gumbell_distribution(samplesize):
     mu = np.mean(maxima) - 0.57721*beta
 
     arrival_rate = (1/beta)*np.exp(-(bins - mu)/beta) * np.exp(-np.exp(-(bins - mu)/beta))
-    dep_rate = 1/(beta * np.sqrt(2 * np.pi))* np.exp(-(bins - mu)**2 / (2 * beta**2))
+    dep_rate = (1/(beta) * np.sqrt(2 * np.pi))* np.exp(-(bins - mu)**2 / (2 * beta**2))
     dep_rate =samplesize * (dep_rate/dep_rate.sum())
     # dep_rate = dep_rate* (samplesize/dep_rate.max())
     arrival_rate = samplesize * (arrival_rate / arrival_rate.sum())
-    # arrival_rate = arrival_rate * (samplesize / arrival_rate.max())
+    arrival_rate[RoundtripTime] = sum(arrival_rate[:RoundtripTime])
     # adding few starting days with no return rate back to city
-    arrival_rate = np.insert(arrival_rate, [0,1,2], [0,0,0])
-
+    arrival_rate[:RoundtripTime]=0
     return dep_rate, arrival_rate
 
