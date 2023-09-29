@@ -21,6 +21,22 @@ class Initialization():
 
 
 if __name__ == '__main__':
+<<<<<<<<< Temporary merge branch 1
+    POPULATION = [100000]
+    ROUNDTRIPTIME = 2
+    PERCENTAGE = 0.3
+    dep_rate, arrival_rate = gumbell.gumbell_distribution(PERCENTAGE, ROUNDTRIPTIME)
+    for population in POPULATION:
+        # the percent of total population went on vacation on in a month
+        scenario = Initialization(population, population*0.1, 2 )
+        # plot.plot_graph(arrival_rate, dep_rate)
+        # plot.plot_cdf(arrival_rate, dep_rate)
+        # fleet, population, hoilday, hoilday_fleet,additional_fleet_per_day = scenario_1(scenario, dep_rate, arrival_rate)
+        fleet, city_pop = scenario_1(scenario, dep_rate, arrival_rate, ROUNDTRIPTIME)
+        plot.scenario1_graph(fleet, city_pop, ROUNDTRIPTIME, PERCENTAGE)
+
+     #    scenario_1_result(scenario, fleet, population, hoilday, hoilday_fleet)
+=========
     from openpyxl import load_workbook
     POPULATION = 100000
     ROUNDTRIPTIME = [0,1,2,3,4,5]
@@ -54,6 +70,7 @@ if __name__ == '__main__':
             df = df.append(new_df, ignore_index=True)
             df.to_excel(workbook_name, sheet_name=sheet_name)
  #    scenario_1_result(scenario, fleet, population, hoilday, hoilday_fleet)
+>>>>>>>>> Temporary merge branch 2
 
      # #___________________________________Scenario_2________________________________________________________________________
      #    Net_vehcile_required, veh_in = scenario_2(scenario,dep_rate, arrival_rate, ROUNDTRIPTIME)
